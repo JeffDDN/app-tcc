@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         margin: 20,
         borderRadius: 9,
-        backgroundColor: "lightgrey",
-        marginVertical: 69,
+        backgroundColor: "rgba(0,0,0,0.2)",
+        marginVertical: 80,
     },
 });
 

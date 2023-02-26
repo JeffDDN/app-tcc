@@ -19,7 +19,7 @@ const Input = styled.TextInput`
     margin-left: 10px;
 `;
 
-export default ({ placeholder, value, onChangeText, password, Icon, iconName, margin }) => {
+export default ({ placeholder, value, onChangeText, password, Icon, iconName, margin, type }) => {
     return (
         <>
             {
@@ -31,6 +31,11 @@ export default ({ placeholder, value, onChangeText, password, Icon, iconName, ma
                             value={value}
                             onChangeText={onChangeText}
                             secureTextEntry={password}
+                            keyboardType={
+                                type === 'number' ? 'number-pad'
+                                    : type === 'email' ? 'email-address'
+                                        : 'default'
+                            }
                         />
                     </InputArea>)
                     :
@@ -41,6 +46,11 @@ export default ({ placeholder, value, onChangeText, password, Icon, iconName, ma
                             value={value}
                             onChangeText={onChangeText}
                             secureTextEntry={password}
+                            keyboardType={
+                                type === 'number' ? 'number-pad'
+                                    : type === 'email' ? 'email-address'
+                                        : 'default'
+                            }
                         />
                     </InputArea>)
             }

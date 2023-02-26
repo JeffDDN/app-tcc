@@ -1,24 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { Image } from "react-native";
 import { Container, LoadingIcon } from './styles';
-import AsyncStorageLib from "@react-native-async-storage/async-storage";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../../contexts/AuthContext";
 
 export default () => {
 
     const navigation = useNavigation();
+    const auth = useContext(AuthContext)
 
     useEffect(() => {
         const checkToken = async () => {
-            const token = await AsyncStorageLib.getItem('token');
+            const token = await AsyncStorage.getItem('token');
             if (token) {
-                //validar token
+                const response = await auth.checkToken(token)
+                if (response) {
+                    navigation.reset({
+                        routes: [{ name: 'Home' }]
+                    });
+                } else {
+                    setTimeout(() => {
+                        navigation.reset({
+                            routes: [{ name: 'SignIn' }]
+                        });
+                    }, 1000);
+                }
             } else {
                 setTimeout(() => {
                     navigation.reset({
                         routes: [{ name: 'SignIn' }]
                     });
-                }, 2000);
+                }, 1000);
             }
         }
         checkToken();

@@ -9,9 +9,6 @@ const api = axios.create({
 })
 
 export default {
-    checkToken: async () => {
-
-    },
 
     login: async (matricula, password) => {
         try {
@@ -27,6 +24,15 @@ export default {
             const response = await api.post('/cadastrar', { nome, matricula, email, password })
             console.log(response.data)
             return response.data
+        } catch (error) {
+            console.log(error)
+        }
+    },
+
+    checkToken: async (token) => {
+        try {
+            const response = await api.post('/verify', { token })
+            return response
         } catch (error) {
             console.log(error)
         }

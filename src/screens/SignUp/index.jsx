@@ -66,6 +66,7 @@ export default () => {
                     Icon={AntDesign}
                     iconName='idcard'
                     margin={true}
+                    type='number'
                 />
 
                 <InputCustom
@@ -75,6 +76,7 @@ export default () => {
                     Icon={MaterialCommunityIcons}
                     iconName='email-outline'
                     margin={true}
+                    type='email'
                 />
                 <InputCustom
                     placeholder="Senha"

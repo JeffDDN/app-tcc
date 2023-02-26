@@ -61,6 +61,7 @@ export default () => {
                     Icon={AntDesign}
                     iconName="idcard"
                     margin={true}
+                    type='number'
                 />
                 <InputCustom
                     placeholder="Senha"
