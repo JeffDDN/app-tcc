@@ -1,19 +1,15 @@
-import react from 'react';
+import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import MainStack from './src/stacks/MainStack';
+import AuthProvider from './src/contexts/AuthContext';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <MainStack />
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <MainStack />
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#E0FFFF',
-//     paddingTop: 50,
-//   }
-// });

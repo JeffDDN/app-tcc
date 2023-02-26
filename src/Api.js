@@ -1,33 +1,34 @@
-const BASE_API = 'https://databases-auth.000webhost.com/';
+import axios from "axios";
+
+const api = axios.create({
+    baseURL: 'http://192.168.15.30:80',
+    headers: {
+        Accept: 'application/json',
+        'acontent-Type': 'application/json'
+    }
+})
 
 export default {
     checkToken: async () => {
-        
+
     },
 
-    SignIn: async (email, password) => {
-        const req = await fetch(`${BASE_API}https://databases-auth.000webhost.com/sql.php?server=1&db=id19091240_app_db&table=cadastros&pos=0`, {
-            method: 'POST',
-            header:{
-                Accept: 'application/jason',
-                'acontent-Type': 'application/jason' 
-            },
-            body: JSON.stringify({email, password})
-        });
-        const json = await req.json();
-        return json;
+    login: async (matricula, password) => {
+        try {
+            const response = await api.post('/login', { matricula, password })
+            return response.data
+        } catch (error) {
+            console.log(error)
+        }
     },
 
-    SignUp: async (name, matricula, email, password) => {
-        const req = await fetch(`${BASE_API}/user`, {
-            method: 'POST',
-            header:{
-                Accept: 'application/jason',
-                'acontent-Type': 'application/jason' 
-            },
-            body: JSON.stringify({name, matricula, email, password})
-        });
-        const json = await req.json();
-        return json;
+    signUp: async (nome, matricula, email, password) => {
+        try {
+            const response = await api.post('/cadastrar', { nome, matricula, email, password })
+            console.log(response.data)
+            return response.data
+        } catch (error) {
+            console.log(error)
+        }
     }
 }

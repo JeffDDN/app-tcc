@@ -1,4 +1,3 @@
-import react from "react";
 import styled from 'styled-components/native';
 import { LinearGradient } from "expo-linear-gradient";
 
@@ -6,20 +5,18 @@ export const Container = styled(LinearGradient).attrs({
     colors: ["#7FFFD4", "#E0FFFF"]
 })`
     flex: 1;
-    justifyContent: center;
-    alignItems: center;
 `;
+
+export const ImageArea = styled.View`
+    align-items: center;
+    margin-top: 120px;
+`
 
 export const InputArea = styled.View`
     width: 100%;
-    padding: 40px;
-`;
-
-export const WelcomeText = styled.Text`
-    font-size: 16px;
-    color: #FFF;
-    font-weight: bold;
-    padding-bottom: 50px;
+    padding: 40px 40px 10px 40px;
+    margin-top: 20px;
+    /* border: 1px solid red; */
 `;
 
 export const LoginButton = styled.TouchableOpacity`
@@ -28,8 +25,7 @@ export const LoginButton = styled.TouchableOpacity`
     border-radius: 30px;
     justify-content: center;
     align-items: center;
-    position: relative;
-    top: 38px
+    margin-top: 55px;
     elevation:2;
 `;
 
@@ -42,10 +38,7 @@ export const LoginText = styled.Text`
 export const SignUpTextArea = styled.View`
     flex-direction: row;
     justify-content: center;
-    margin-top: 50px;
-    margin-bottom: 20px;
-    position: relative;
-    top: 70px;
+    margin-top: 110px;
 `;
 
 export const SignUpText = styled.Text`

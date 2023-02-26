@@ -1,4 +1,4 @@
-import react, { useEffect } from "react";
+import React, { useEffect } from "react";
 import { Image } from "react-native";
 import { Container, LoadingIcon } from './styles';
 import AsyncStorageLib from "@react-native-async-storage/async-storage";
@@ -11,14 +11,14 @@ export default () => {
     useEffect(() => {
         const checkToken = async () => {
             const token = await AsyncStorageLib.getItem('token');
-            if(token){
+            if (token) {
                 //validar token
-            }else{
+            } else {
                 setTimeout(() => {
                     navigation.reset({
-                        routes: [{name:'SignIn'}]
+                        routes: [{ name: 'SignIn' }]
                     });
-                }, 3000);
+                }, 2000);
             }
         }
         checkToken();
@@ -26,8 +26,8 @@ export default () => {
 
     return (
         <Container>
-            <Image style={{width:200, height:200}} source={require('../../../assets/logo1.png')}/>
-            <LoadingIcon size="large" color="black"/>
+            <Image style={{ width: 200, height: 200 }} source={require('../../assets/logo1.png')} />
+            <LoadingIcon size="large" color="black" />
         </Container>
     );
 }
