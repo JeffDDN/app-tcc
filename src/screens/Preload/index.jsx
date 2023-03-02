@@ -40,7 +40,7 @@ export default () => {
     return (
         <Container>
             <Image style={{ width: 200, height: 200 }} source={require('../../assets/logo1.png')} />
-            <LoadingIcon size="large" color="black" />
+            <LoadingIcon size="large" color="rgba(0,0,0,0.6)" />
         </Container>
     );
 }

@@ -25,19 +25,16 @@ export default () => {
     const auth = useContext(AuthContext)
 
     const SignUpScreen = () => {
-        navigation.reset({
-            routes: [{ name: 'SignUp' }]
-        });
+        navigation.navigate('SignUp')
     }
 
     const LoginClick = async () => {
         if (matriculaField != '' && passwordField != '') {
             const isLogged = await auth.login(matriculaField, passwordField)
             if (isLogged) {
-                // navigation.reset({
-                //     routes: [{ name: 'Home' }]
-                // });
-                navigation.navigate('Home');
+                navigation.reset({
+                    routes: [{ name: 'Home' }]
+                });
             } else {
                 alert('email ou senha incorreto')
             }

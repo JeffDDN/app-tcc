@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { View, Image, Text, TouchableOpacity, Modal } from "react-native";
+import { View, Image, Text, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Preload from '../screens/Preload';
 import SignIn from '../screens/SignIn';
@@ -8,7 +8,7 @@ import Home from "../screens/Home";
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { ModalContainer, ModalContent, ModalHeader, InfoArea, CloseArea, CloseButton } from "./styles";
+import { ModalContainer, ModalContent, ModalHeader, CloseArea, CloseButton, Fieldset, FieldTitle } from "./styles";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Stack = createNativeStackNavigator();
@@ -42,11 +42,16 @@ export default () => {
         >
             <Stack.Screen name="Preload" component={Preload} />
             <Stack.Screen name="SignIn" component={SignIn} />
-            <Stack.Screen name="SignUp" component={SignUp} options={{ animation: 'slide_from_right' }} />
+            <Stack.Screen name="SignUp" component={SignUp} options={{
+                animation: 'slide_from_right',
+                headerShown: true,
+                headerTransparent: true,
+                title: 'Cadastro'
+            }} />
             <Stack.Screen name="Home" component={Home} options={{
                 headerShown: true,
-                title: 'Qr Presense',
-                headerTintColor: 'rgba(0,0,0,0.6)',
+                title: 'Qr Presence',
+                headerTintColor: 'rgba(0,0,0,0.7)',
                 headerStyle: {
                     backgroundColor: '#7FFFD4',
                     shadowColor: '#000',
@@ -74,11 +79,26 @@ export default () => {
                             <ModalContainer>
                                 <ModalContent>
                                     <ModalHeader>
-                                        <InfoArea>
-                                            <Text style={{ color: '#FFF', fontSize: 15 }} >{nomeAluno()}</Text>
-                                            <Text style={{ color: '#FFF', marginTop: 8, fontSize: 12 }}>Matrícula</Text>
-                                            <Text style={{ color: '#FFF' }}>{auth.user.matricula}</Text>
-                                        </InfoArea>
+                                        <View>
+                                            <Text style={{ color: '#FFF', fontSize: 16, borderBottomWidth: 1, borderBottomColor: '#FFF', textAlign: "center" }} >{nomeAluno()}</Text>
+
+                                            <Fieldset margem='25px'>
+                                                <FieldTitle>Matrícula</FieldTitle>
+                                                <Text style={styles.fieldText}>{auth.user.matricula}</Text>
+                                            </Fieldset>
+                                            <Fieldset margem='15px'>
+                                                <FieldTitle>Graduação</FieldTitle>
+                                                <Text style={styles.fieldText}>{auth.user.graduacao}</Text>
+                                            </Fieldset>
+                                            <Fieldset margem='15px'>
+                                                <FieldTitle>IES</FieldTitle>
+                                                <Text style={styles.fieldText}>{auth.user.ies}</Text>
+                                            </Fieldset>
+                                            <Fieldset margem='15px'>
+                                                <FieldTitle>Campus</FieldTitle>
+                                                <Text style={styles.fieldText}>{auth.user.campus}</Text>
+                                            </Fieldset>
+                                        </View>
 
                                         <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                                             <Ionicons name="close" size={24} color="#FFF" />
@@ -86,11 +106,9 @@ export default () => {
                                     </ModalHeader>
                                     <CloseArea>
                                         <CloseButton onPress={() => handleLogout()}>
-                                            <Text style={{ color: '#FFF' }}>Sair</Text>
+                                            <Text style={{ color: '#FFF' }}>Sair do APP</Text>
                                         </CloseButton>
                                     </CloseArea>
-                                    {/* <Button onPress={() => setModalVisible(!modalVisible)} title='Fechar' /> */}
-                                    {/* <Button title="Sair" onPress={() => handleLogout()} /> */}
                                 </ModalContent>
                             </ModalContainer>
                         </Modal>
@@ -100,3 +118,10 @@ export default () => {
         </Stack.Navigator >
     )
 };
+
+const styles = StyleSheet.create({
+    fieldText: {
+        color: '#FFF',
+        fontSize: 12
+    }
+})

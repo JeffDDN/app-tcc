@@ -17,10 +17,10 @@ export default function QrCode() {
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
     Linking.openURL(data);
-     
+
     // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
     // alert(`${data}`);
-    
+
   };
 
   if (hasPermission === null) {
@@ -32,11 +32,9 @@ export default function QrCode() {
 
   return (
     <View style={{
-        width: "100%",
-        height: "90%",
-        margin: 3,
-        flexDirection: "column",
-        justifyContent: "flex-end"
+      width: "100%",
+      height: "85%",
+      flexDirection: "column",
     }}>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}

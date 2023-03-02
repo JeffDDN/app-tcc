@@ -5,37 +5,26 @@ import {
     InputArea,
     LoginButton,
     LoginText,
-    SignUpText,
-    SignUpTextArea,
-    SignUpButton,
-    SignUpButtonText,
     WelcomeText
 } from './styles'
 import InputCustom from "../../components/InputCustom";
 import { MaterialCommunityIcons, AntDesign, FontAwesome5 } from '@expo/vector-icons';
-import { AuthContext } from "../../contexts/AuthContext";
+import Api from "../../Api";
 
 
 export default () => {
 
     const navigation = useNavigation();
-    const auth = useContext(AuthContext)
 
     const [nameField, setNameField] = useState('');
     const [registerField, setRegisterField] = useState('');
     const [emailField, setEmailField] = useState('');
     const [passwordField, setPasswordField] = useState('');
 
-    const signInScreen = () => {
-        navigation.reset({
-            routes: [{ name: 'SignIn' }]
-        });
-    }
-
     const clickSignUp = async () => {
         if (nameField != '' && registerField != '' && emailField != '' && passwordField != '') {
-            const signUp = await auth.signUp(nameField, registerField, emailField, passwordField)
-            if (signUp) {
+            const status = await Api.signUp(nameField, registerField, emailField, passwordField)
+            if (status === 200) {
                 navigation.reset({
                     routes: [{ name: 'SignIn' }]
                 })
@@ -47,7 +36,7 @@ export default () => {
 
     return (
         <Container>
-            <WelcomeText>Cadastro</WelcomeText>
+            {/* <WelcomeText>Cadastro</WelcomeText> */}
 
             <InputArea>
                 <InputCustom
@@ -92,12 +81,6 @@ export default () => {
                 </LoginButton>
             </InputArea>
 
-            <SignUpTextArea>
-                <SignUpText>Já possui uma conta?</SignUpText>
-                <SignUpButton onPress={() => signInScreen()}>
-                    <SignUpButtonText>Login</SignUpButtonText>
-                </SignUpButton>
-            </SignUpTextArea>
         </Container>
     );
 }

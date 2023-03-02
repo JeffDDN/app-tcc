@@ -4,13 +4,15 @@ import Api from "../Api";
 
 export const AuthContext = createContext({
     login: (matricula, password) => Promise,
-    signUp: (nome, matricula, email, password) => Promise,
     checkToken: (token) => Promise,
     user: {
         id: null,
         nome: null,
         matricula: null,
-        email: null
+        email: null,
+        graduacao: null,
+        campus: null,
+        ies: null,
     }
 })
 
@@ -27,11 +29,6 @@ export default ({ children }) => {
         }
     }
 
-    const signUp = async (nome, matricula, email, password) => {
-        const data = await Api.signUp(nome, matricula, email, password)
-
-    }
-
     const checkToken = async (token) => {
         const data = await Api.checkToken(token)
         if (data.status === 200) {
@@ -41,7 +38,7 @@ export default ({ children }) => {
     }
 
     return (
-        <AuthContext.Provider value={{ login, signUp, checkToken, user }}>
+        <AuthContext.Provider value={{ login, checkToken, user }}>
             {children}
         </AuthContext.Provider>
     )

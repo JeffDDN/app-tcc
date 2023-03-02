@@ -6,19 +6,18 @@ export const Container = styled(LinearGradient).attrs({
     colors: ["#7FFFD4", "#E0FFFF"]
 })`
     flex: 1;
-    justify-content: center;
-    align-items: center;
 `;
 
 export const WelcomeText = styled.Text`
     font-size: 26px;
-    color: #000;
+    color: rgba(0,0,0,0.8);
     font-weight: bold;
 `;
 
 export const InputArea = styled.View`
     width: 100%;
     padding: 40px 40px 0 40px;
+    margin-top: 90px;
 `;
 
 export const LoginButton = styled.TouchableOpacity`
@@ -27,33 +26,12 @@ export const LoginButton = styled.TouchableOpacity`
     border-radius: 30px;
     justify-content: center;
     align-items: center;
-    margin-top: 55px;
+    margin-top: 80px;
     elevation: 2;
 `;
 
 export const LoginText = styled.Text`
     font-size: 18px;
-    color: #000;
-    font-weight: bold;
-`;
-
-export const SignUpTextArea = styled.View`
-    flex-direction: row;
-    justify-content: center;
-    margin-top: 110px;
-`;
-
-export const SignUpText = styled.Text`
-    font-size: 16px;
-    color: #000;
-`;
-
-export const SignUpButton = styled.TouchableOpacity`
-    margin-left: 5px;
-`;
-
-export const SignUpButtonText = styled.Text`
-    font-size: 16px;
     color: #000;
     font-weight: bold;
 `;

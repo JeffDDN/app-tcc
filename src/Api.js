@@ -22,8 +22,8 @@ export default {
     signUp: async (nome, matricula, email, password) => {
         try {
             const response = await api.post('/cadastrar', { nome, matricula, email, password })
-            console.log(response.data)
-            return response.data
+            console.log(response)
+            return response.status
         } catch (error) {
             console.log(error)
         }
