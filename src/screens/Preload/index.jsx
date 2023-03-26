@@ -15,7 +15,7 @@ export default () => {
             const token = await AsyncStorage.getItem('token');
             if (token) {
                 const response = await auth.checkToken(token)
-                if (response) {
+                if (response === 200) {
                     navigation.reset({
                         routes: [{ name: 'Home' }]
                     });
@@ -40,7 +40,7 @@ export default () => {
     return (
         <Container>
             <Image style={{ width: 200, height: 200 }} source={require('../../assets/logo1.png')} />
-            <LoadingIcon size="large" color="rgba(0,0,0,0.6)" />
+            <LoadingIcon size="large" color="rgba(0,0,0,0.7)" />
         </Container>
     );
 }

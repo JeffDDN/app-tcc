@@ -8,7 +8,7 @@ import Home from "../screens/Home";
 import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { ModalContainer, ModalContent, ModalHeader, CloseArea, CloseButton, Fieldset, FieldTitle } from "./styles";
+import { ModalContainer, ModalContent, ModalHeader, CloseArea, CloseButton, ModalMiddle, Fieldset, FieldTitle } from "./styles";
 import { AuthContext } from "../contexts/AuthContext";
 
 const Stack = createNativeStackNavigator();
@@ -26,7 +26,7 @@ export default () => {
     }
 
     const handleLogout = async () => {
-        AsyncStorage.clear()
+        await AsyncStorage.clear()
         setModalVisible(false)
         navigate.reset({
             routes: [{ name: 'Preload' }]
@@ -79,31 +79,30 @@ export default () => {
                             <ModalContainer>
                                 <ModalContent>
                                     <ModalHeader>
-                                        <View>
-                                            <Text style={{ color: '#FFF', fontSize: 16, borderBottomWidth: 1, borderBottomColor: '#FFF', textAlign: "center" }} >{nomeAluno()}</Text>
-
-                                            <Fieldset margem='25px'>
-                                                <FieldTitle>Matrícula</FieldTitle>
-                                                <Text style={styles.fieldText}>{auth.user.matricula}</Text>
-                                            </Fieldset>
-                                            <Fieldset margem='15px'>
-                                                <FieldTitle>Graduação</FieldTitle>
-                                                <Text style={styles.fieldText}>{auth.user.graduacao}</Text>
-                                            </Fieldset>
-                                            <Fieldset margem='15px'>
-                                                <FieldTitle>IES</FieldTitle>
-                                                <Text style={styles.fieldText}>{auth.user.ies}</Text>
-                                            </Fieldset>
-                                            <Fieldset margem='15px'>
-                                                <FieldTitle>Campus</FieldTitle>
-                                                <Text style={styles.fieldText}>{auth.user.campus}</Text>
-                                            </Fieldset>
-                                        </View>
+                                        <Text style={{ color: '#FFF', fontSize: 16, borderBottomWidth: 1, borderBottomColor: '#FFF', textAlign: "center", width: 150 }} >{nomeAluno()}</Text>
 
                                         <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}>
                                             <Ionicons name="close" size={24} color="#FFF" />
                                         </TouchableOpacity>
                                     </ModalHeader>
+                                    <ModalMiddle>
+                                        <Fieldset>
+                                            <FieldTitle>Matrícula</FieldTitle>
+                                            <Text style={styles.fieldText}>{auth.user.matricula}</Text>
+                                        </Fieldset>
+                                        <Fieldset margem='15px'>
+                                            <FieldTitle>Graduação</FieldTitle>
+                                            <Text style={styles.fieldText}>{auth.user.graduacao}</Text>
+                                        </Fieldset>
+                                        <Fieldset margem='15px'>
+                                            <FieldTitle>IES</FieldTitle>
+                                            <Text style={styles.fieldText}>{auth.user.ies}</Text>
+                                        </Fieldset>
+                                        <Fieldset margem='15px'>
+                                            <FieldTitle>Campus</FieldTitle>
+                                            <Text style={styles.fieldText}>{auth.user.campus}</Text>
+                                        </Fieldset>
+                                    </ModalMiddle>
                                     <CloseArea>
                                         <CloseButton onPress={() => handleLogout()}>
                                             <Text style={{ color: '#FFF' }}>Sair do APP</Text>

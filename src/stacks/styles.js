@@ -12,8 +12,8 @@ export const ModalContent = styled.View`
     width: 270px;
     border-radius: 8px;
     background-color: #3e4144;
-    justify-content: space-between;
     elevation: 4;
+    position: relative;
 `
 
 export const ModalHeader = styled.View`
@@ -26,6 +26,8 @@ export const ModalHeader = styled.View`
 export const CloseArea = styled.View`
     width: 100%;
     padding: 15px 40px;
+    position: absolute;
+    bottom: 0;
 `
 
 export const CloseButton = styled.TouchableOpacity`
@@ -35,6 +37,11 @@ export const CloseButton = styled.TouchableOpacity`
     border-radius: 20px;
     justify-content: center;
     align-items: center;
+`
+
+export const ModalMiddle = styled.View`
+    margin-top: 15px;
+    padding: 0 15px;
 `
 
 export const Fieldset = styled.View`

@@ -13,19 +13,24 @@ export default {
     login: async (matricula, password) => {
         try {
             const response = await api.post('/login', { matricula, password })
-            return response.data
+            return response
         } catch (error) {
-            console.log(error)
+            return new Error(
+                JSON.stringify(error.response) ||
+                "Erro: Não foi possível realizar o login"
+            )
         }
     },
 
     signUp: async (nome, matricula, email, password) => {
         try {
             const response = await api.post('/cadastrar', { nome, matricula, email, password })
-            console.log(response)
             return response.status
         } catch (error) {
-            console.log(error)
+            return new Error(
+                JSON.stringify(error.response) ||
+                "Erro: Não foi possível realizar o cadastro"
+            )
         }
     },
 
@@ -34,7 +39,10 @@ export default {
             const response = await api.post('/verify', { token })
             return response
         } catch (error) {
-            console.log(error)
+            return new Error(
+                JSON.stringify(error.response) ||
+                "Erro: Token inválido"
+            )
         }
     }
 }

@@ -8,12 +8,6 @@ export const Container = styled(LinearGradient).attrs({
     flex: 1;
 `;
 
-export const WelcomeText = styled.Text`
-    font-size: 26px;
-    color: rgba(0,0,0,0.8);
-    font-weight: bold;
-`;
-
 export const InputArea = styled.View`
     width: 100%;
     padding: 40px 40px 0 40px;

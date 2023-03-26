@@ -11,8 +11,8 @@ export const AuthContext = createContext({
         matricula: null,
         email: null,
         graduacao: null,
-        campus: null,
         ies: null,
+        campus: null,
     }
 })
 
@@ -21,19 +21,21 @@ export default ({ children }) => {
     const [user, setUser] = useState(null)
 
     const login = async (matricula, password) => {
-        const data = await Api.login(matricula, password)
-        if (data.token) {
-            await AsyncStorage.setItem('token', data.token)
-            setUser(data.user)
-            return true
+        const response = await Api.login(matricula, password)
+        if (response.status === 200) {
+            await AsyncStorage.setItem('token', response.data.token)
+            setUser(response.data.user)
+            return response.status
+        } else {
+            return response.status
         }
     }
 
     const checkToken = async (token) => {
-        const data = await Api.checkToken(token)
-        if (data.status === 200) {
-            setUser(data.data.user[0])
-            return true
+        const response = await Api.checkToken(token)
+        if (response.status === 200) {
+            setUser(response.data.user[0])
+            return response.status
         }
     }
 
