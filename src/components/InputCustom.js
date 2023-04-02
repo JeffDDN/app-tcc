@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
+import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
+import { Feather } from '@expo/vector-icons';
 
 const InputArea = styled.View`
     width: 100%;
@@ -19,41 +21,34 @@ const Input = styled.TextInput`
     margin-left: 10px;
 `;
 
-export default ({ placeholder, value, onChangeText, password, Icon, iconName, margin, type }) => {
+export default ({ placeholder, value, onChangeText, password, Icon, iconName, margin, type, passIcon }) => {
+
+    const [passVisible, setPassVisible] = useState(password)
+
     return (
         <>
-            {
-                (margin) ?
-                    (<InputArea style={{ marginBottom: 25 }} >
-                        <Icon name={iconName} size={24} color="black" />
-                        <Input
-                            placeholder={placeholder}
-                            value={value}
-                            onChangeText={onChangeText}
-                            secureTextEntry={password}
-                            keyboardType={
-                                type === 'number' ? 'number-pad'
-                                    : type === 'email' ? 'email-address'
-                                        : 'default'
-                            }
-                        />
-                    </InputArea>)
-                    :
-                    (<InputArea>
-                        <Icon name={iconName} size={24} color="black" />
-                        <Input
-                            placeholder={placeholder}
-                            value={value}
-                            onChangeText={onChangeText}
-                            secureTextEntry={password}
-                            keyboardType={
-                                type === 'number' ? 'number-pad'
-                                    : type === 'email' ? 'email-address'
-                                        : 'default'
-                            }
-                        />
-                    </InputArea>)
-            }
+            <InputArea style={{ marginBottom: margin ? 25 : 0 }} >
+                <Icon name={iconName} size={24} color="rgba(0,0,0,0.7)" />
+                <Input
+                    placeholder={placeholder}
+                    value={value}
+                    onChangeText={onChangeText}
+                    secureTextEntry={passVisible}
+                    keyboardType={
+                        type === 'number' ? 'number-pad'
+                            : type === 'email' ? 'email-address'
+                                : 'default'
+                    }
+                />
+                {
+                    (passIcon) ?
+                        (<TouchableOpacity onPress={() => setPassVisible(!passVisible)}>
+                            <Feather name={passVisible ? "eye" : "eye-off"} size={22} color="rgba(0,0,0,0.5)" />
+                        </TouchableOpacity>)
+                        : ''
+
+                }
+            </InputArea>
         </>
     );
 }

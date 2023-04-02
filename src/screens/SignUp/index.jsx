@@ -21,25 +21,32 @@ export default () => {
     const [registerField, setRegisterField] = useState('');
     const [emailField, setEmailField] = useState('');
     const [passwordField, setPasswordField] = useState('');
+    const [ConfirmPasswordField, setConfirmPasswordField] = useState('');
     const [showFildAlert, setShowFildAlert] = useState(false)
     const [showErroAlert, setShowErroAlert] = useState(false)
     const [showLoadAlert, setShowLoadAlert] = useState(false)
     const [showSuccesAlert, setShowSuccesAlert] = useState(false)
+    const [showConfirmAlert, setShowConfirmAlert] = useState(false)
 
     const clickSignUp = async () => {
-        if (nameField != '' && registerField != '' && emailField != '' && passwordField != '') {
-            setShowLoadAlert(true)
-            const status = await Api.signUp(nameField, registerField, emailField, passwordField)
-            if (status === 200) {
-                setShowSuccesAlert(true)
-                setShowLoadAlert(false)
-                setTimeout(() => {
-                    navigation.reset({
-                        routes: [{ name: 'SignIn' }]
-                    })
-                }, 1500);
+        if (nameField != '' && registerField != '' && emailField != '' && passwordField != '' && ConfirmPasswordField != '') {
+            if (passwordField === ConfirmPasswordField) {
+                setShowLoadAlert(true)
+                const status = await Api.signUp(nameField, registerField, emailField, passwordField)
+                if (status === 200) {
+                    setShowSuccesAlert(true)
+                    setShowLoadAlert(false)
+                    setTimeout(() => {
+                        navigation.reset({
+                            routes: [{ name: 'SignIn' }]
+                        })
+                    }, 1500);
+                } else {
+                    setShowErroAlert(true)
+                    setShowLoadAlert(false)
+                }
             } else {
-                setShowErroAlert(true)
+                setShowConfirmAlert(true)
             }
         } else {
             setShowFildAlert(true)
@@ -91,7 +98,19 @@ export default () => {
                     onChangeText={t => setPasswordField(t)}
                     password={true}
                     Icon={AntDesign}
+                    margin={true}
                     iconName='lock'
+                    passIcon={true}
+                />
+
+                <InputCustom
+                    placeholder="Confirmar senha"
+                    value={ConfirmPasswordField}
+                    onChangeText={t => setConfirmPasswordField(t)}
+                    password={true}
+                    Icon={AntDesign}
+                    iconName='lock'
+                    passIcon={true}
                 />
 
                 <LoginButton onPress={() => clickSignUp()} >
@@ -120,6 +139,7 @@ export default () => {
             <AwesomeAlert show={showErroAlert} closeOnTouchOutside={true} closeOnHardwareBackPress={false} title="Algo inesperado aconteceu" message="Erro ao cadastrar" showCancelButton={true} cancelButtonColor="#7FFFD4" cancelButtonTextStyle={{ color: "rgba(0,0,0,0.7)" }} cancelText="Tentar novamente" onCancelPressed={() => { setShowErroAlert(false); }} onDismiss={() => { setShowErroAlert(false); }} />
             <AwesomeAlert show={showLoadAlert} closeOnTouchOutside={false} closeOnHardwareBackPress={false} showProgress={true} progressColor="rgba(0,0,0,0.7)" />
             <AwesomeAlert show={showSuccesAlert} closeOnTouchOutside={false} closeOnHardwareBackPress={false} customView={customAlertView()} />
+            <AwesomeAlert show={showConfirmAlert} closeOnTouchOutside={true} closeOnHardwareBackPress={false} title="Ops..." message="Confirmar senha não confere" showCancelButton={true} cancelButtonColor="#7FFFD4" cancelButtonTextStyle={{ color: "rgba(0,0,0,0.7)" }} cancelText="Tentar novamente" onCancelPressed={() => { setShowConfirmAlert(false); }} onDismiss={() => { setShowConfirmAlert(false); }} />
 
         </Container>
     );

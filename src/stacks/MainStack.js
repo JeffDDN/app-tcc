@@ -46,7 +46,8 @@ export default () => {
                 animation: 'slide_from_right',
                 headerShown: true,
                 headerTransparent: true,
-                title: 'Cadastro'
+                title: 'Cadastro',
+                headerBackTitle: "voltar"
             }} />
             <Stack.Screen name="Home" component={Home} options={{
                 headerShown: true,

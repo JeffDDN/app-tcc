@@ -13,7 +13,7 @@ import {
     SignUpButtonText,
 } from './styles'
 import InputCustom from "../../components/InputCustom";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Feather } from '@expo/vector-icons';
 import { AuthContext } from "../../contexts/AuthContext";
 import AwesomeAlert from 'react-native-awesome-alerts';
 
@@ -73,6 +73,7 @@ export default () => {
                     password={true}
                     Icon={AntDesign}
                     iconName="lock"
+                    passIcon={true}
                 />
 
                 <LoginButton onPress={LoginClick}>
